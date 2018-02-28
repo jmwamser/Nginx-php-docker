@@ -5,9 +5,11 @@ services:
         image: nginx:latest
         ports:
             - "80:80"
+        volumes_from:
+            - php
         volumes:
-            - ./code:/code
             - ./site.conf:/etc/nginx/conf.d/default.conf
+            - ./logs/nginx/:/var/log/nginx
         networks:
             - code-network
     php:
@@ -17,6 +19,16 @@ services:
             - ./code:/code
         networks:
             - code-network
+    elk:
+        image: willdurand/elk
+        ports:
+            - 81:80
+        volumes:
+            - ./elk/logstash:/etc/logstash
+            - ./elk/logstash/patterns:/opt/logstash/patterns
+        volumes_from:
+            - php
+            - web
 
 networks:
     code-network:
