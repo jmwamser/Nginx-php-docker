@@ -2,7 +2,7 @@ FROM php:fpm-jessie
 
 LABEL MAINTAINER Jordan Wamser<jwamser@redpandacoding.com>
 
-ARG buildtime_variable=development
+ARG buildtime_variable=production
 ENV PHP_ENV=$buildtime_variable
 
 # install php 72
@@ -35,7 +35,7 @@ RUN pecl install sqlsrv && \
 pecl install pdo_sqlsrv && \
 docker-php-ext-enable sqlsrv pdo_sqlsrv
 
-COPY ./phpfpm/ini/php.ini-${PHP_ENV} /usr/local/etc/php/php.ini
+COPY ./ini/php.ini-${PHP_ENV} /usr/local/etc/php/php.ini
 
 RUN echo extension=sqlsrv.so > /usr/local/etc/php/conf.d/sqlsrv.ini
 RUN echo extension=pdo_sqlsrv.so > /usr/local/etc/php/conf.d/pdo_sqlsrv.ini
