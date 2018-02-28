@@ -4,11 +4,13 @@ LABEL MAINTAINER Jordan Wamser<jwamser@redpandacoding.com>
 
 # install php 72
 RUN apt-get update
-RUN apt-get install -y apt-transport-https lsb-release ca-certificates
+RUN apt-get install -y  apt-transport-https lsb-release ca-certificates
+# wget
 # RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 # RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/php.list
-RUN apt-get update
+# RUN apt-get update
 RUN apt-get install -y php-pear
+# php7.2 php7.2-fpm 
 RUN pecl channel-update pecl.php.net
 
 RUN apt-get install -y curl
