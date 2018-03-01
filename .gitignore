@@ -1,4 +1,4 @@
 logs/
 phpfpm/ini/php\.ini
 
-code/*
+code/
