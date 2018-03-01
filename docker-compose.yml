@@ -15,22 +15,23 @@ services:
     php:
         # image: php:fpm
         build: ./phpfpm/
-        # environment:
-        #     ENABLE_XDEBUG: 1
+        environment:
+            ENABLE_XDEBUG: "1"
         volumes:
             - ./code:/code
+            - ./logs/php/:/var/logs/php
         networks:
             - code-network
-    elk:
-        image: willdurand/elk
-        ports:
-            - 81:80
-        volumes:
-            - ./elk/logstash:/etc/logstash
-            - ./elk/logstash/patterns:/opt/logstash/patterns
-        volumes_from:
-            - php
-            - web
+    # elk:
+    #     image: willdurand/elk
+    #     ports:
+    #         - 81:80
+    #     volumes:
+    #         - ./elk/logstash:/etc/logstash
+    #         - ./elk/logstash/patterns:/opt/logstash/patterns
+    #     volumes_from:
+    #         - php
+    #         - web
 
 networks:
     code-network:

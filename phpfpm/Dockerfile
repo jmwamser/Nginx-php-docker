@@ -2,7 +2,7 @@ FROM php:fpm-jessie
 
 LABEL MAINTAINER Jordan Wamser<jwamser@redpandacoding.com>
 
-ENV ENABLE_XDEBUG=0
+ENV ENABLE_XDEBUG=
 
 # install php 72
 RUN apt-get update
@@ -33,13 +33,14 @@ RUN pear config-set php_ini `php --ini | grep "Loaded Configuration" | sed -e "s
 RUN pecl install sqlsrv && \
 pecl install pdo_sqlsrv
 
-COPY ./ini/php.ini /usr/local/etc/php/php.ini
+COPY ./ini/php.ini /usr/local/etc/php/conf.d/php.ini
 
-RUN echo extension=sqlsrv.so > /usr/local/etc/php/conf.d/sqlsrv.ini
-RUN echo extension=pdo_sqlsrv.so > /usr/local/etc/php/conf.d/pdo_sqlsrv.ini
+# RUN echo extension=sqlsrv.so > /usr/local/etc/php/conf.d/sqlsrv.ini
+# RUN echo extension=pdo_sqlsrv.so > /usr/local/etc/php/conf.d/pdo_sqlsrv.ini
+RUN docker-php-ext-enable pdo_sqlsrv sqlsrv
 
 # Install XDebug
-RUN if [ "${ENABLE_XDEBUG}" -eq "1" ]; then \
+RUN if [ -n ${ENABLE_XDEBUG} ]; then \
         pecl install xdebug-2.5.0 \
             && docker-php-ext-enable xdebug \
             && echo "xdebug.idekey = PHPSTORM" >> /usr/local/etc/php/conf.d/xdebug.ini \
@@ -48,8 +49,7 @@ RUN if [ "${ENABLE_XDEBUG}" -eq "1" ]; then \
             && echo "xdebug.remote_autostart = 1" >> /usr/local/etc/php/conf.d/xdebug.ini \
             && echo "xdebug.remote_connect_back = 0" >> /usr/local/etc/php/conf.d/xdebug.ini \
             && echo "xdebug.profiler_enable = 1" >> /usr/local/etc/php/conf.d/xdebug.ini \
-            && echo "xdebug.remote_host = docker.for.mac.localhost" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    ;fi
+            && echo "xdebug.remote_host = docker.for.mac.localhost" >> /usr/local/etc/php/conf.d/xdebug.ini; fi
 
 # EXPOSE 8080
 # WORKDIR /app
