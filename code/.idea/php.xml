@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="PhpProjectServersManager">
+    <servers>
+      <server host="localhost" id="8b191a53-e483-437d-8515-b77017d3f6e2" name="localhost" use_path_mappings="true">
+        <path_mappings>
+          <mapping local-root="$PROJECT_DIR$" remote-root="/code" />
+          <mapping local-root="$PROJECT_DIR$/index.php" remote-root="/Users/jwamser/DEV/Nginx-php-docker/code/index.php" />
+          <mapping local-root="$PROJECT_DIR$/ms.php" remote-root="/Users/jwamser/DEV/Nginx-php-docker/code/ms.php" />
+        </path_mappings>
+      </server>
+    </servers>
+  </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7" />
 </project>
