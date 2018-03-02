@@ -19,7 +19,7 @@ services:
             ENABLE_XDEBUG: "1"
         volumes:
             - ./code:/code
-            - ./logs/php/:/var/logs/php
+#            - ./logs/php:/var/log/php-fpm/error.log
         networks:
             - code-network
     # elk:
