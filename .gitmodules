@@ -1,0 +1,3 @@
+[submodule "template/phptemp"]
+	path = template/phptemp
+	url = https://github.com/sirio3mil/docker-php-fpm-image.git
