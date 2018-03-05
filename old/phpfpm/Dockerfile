@@ -60,7 +60,7 @@ RUN yum clean all
 #RUN ln -sf /dev/stdout /var/log/nginx/access.log
 #RUN ln -sf /dev/stderr /var/log/nginx/error.log
  
-EXPOSE 9051
+EXPOSE 9050
 
 ADD container-files/script/* /tmp/script/
 COPY container-files/php.ini /etc/php.ini
@@ -70,4 +70,4 @@ RUN chmod +x /tmp/script/bootstrap.sh
 
 # put customized config and code files to /data
 
-#ENTRYPOINT ["/tmp/script/bootstrap.sh"]
+ENTRYPOINT ["/tmp/script/bootstrap.sh"]
