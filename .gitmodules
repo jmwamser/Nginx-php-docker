@@ -1,3 +1,0 @@
-[submodule "template/phptemp"]
-	path = template/phptemp
-	url = https://github.com/jmwamser/phpfpm.git
