@@ -4,8 +4,6 @@ services:
 #jw-todo: add depends_on options to services.
     web:
             image: nginx:latest
-            hostname: nginx
-            domainname: vortexreps.dev
             ports:
                 - "8080:80"
             volumes:
@@ -15,10 +13,8 @@ services:
     php:
         build: ./php
         image: rpc_php:latest
-        hostname: code
-        domainname: vortexreps.dev
-#        environment:
-#            ENABLE_XDEBUG: "1"
+        environment:
+            ENABLE_XDEBUG: "1"
         volumes:
             - ./code:/code
 #            - ./logs/php:/var/log/php-fpm

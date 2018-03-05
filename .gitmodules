@@ -1,3 +1,0 @@
-[submodule "redpandacoding/nginx"]
-	path = nginx
-	url = https://github.com/jmwamser/Nginx-Docker.git
