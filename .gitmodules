@@ -1,6 +1,2 @@
-[submodule "redpandacoding/php"]
-	path = ./php
 [submodule "redpandacoding/nginx"]
-	path = ./nginx
-[submodule "redpandacoding/nginx"]
-	path = ./mssql-dev
+	path = nginx
