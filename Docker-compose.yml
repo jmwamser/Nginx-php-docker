@@ -3,18 +3,21 @@ version: '2.1'
 services:
 #jw-todo: add depends_on options to services.
     web:
-            image: nginx:latest
+            build: ./nginx
+            image: rpc_nginx:latest
+            depends_on:
+              - php
             ports:
                 - "8080:80"
-            volumes:
-                - ./code:/code
-                - ./old/site.conf:/etc/nginx/conf.d/default.conf
+            volumes_from:
+              - php
 
     php:
-        build: ./php
+        build: ./php72
         image: rpc_php:latest
         environment:
             ENABLE_XDEBUG: "1"
+            SITE_CONF: "symfony"
         volumes:
             - ./code:/code
 #            - ./logs/php:/var/log/php-fpm
