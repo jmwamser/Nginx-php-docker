@@ -1,0 +1,9 @@
+[submodule "php72"]
+	path = php72
+	url = https://github.com/jmwamser/php72.git
+[submodule "nginx"]
+	path = nginx
+	url = https://github.com/jmwamser/Nginx-Docker.git
+[submodule "mssql"]
+	path = mssql
+	url = https://github.com/jmwamser/mssql-docker.git
