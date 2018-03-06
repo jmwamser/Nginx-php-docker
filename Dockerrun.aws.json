@@ -1,0 +1,63 @@
+{
+  "AWSEBDockerrunVersion": 2.1,
+  "volumes": [
+    {
+      "name": "php",
+      "host": {
+        "sourcePath": "/var/app/current/php"
+      }
+    },
+    {
+      "name": "web",
+      "host": {
+        "sourcePath": "/var/app/current/proxy/conf.d"
+      }
+    }
+  ],
+  "containerDefinitions": [
+    {
+      "name": "php",
+      "image": "rpc_php:fpm",
+      "essential": true,
+      "memory": 128,
+      "mountPoints": [
+        {
+          "sourceVolume": "php",
+          "containerPath": "/code",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "name": "web",
+      "image": "rpc_nginx:smfy",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": [
+        "php"
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "php-code",
+          "containerPath": "/code",
+          "readOnly": true
+        },
+        {
+          "sourceVolume": "nginx-proxy-conf",
+          "containerPath": "/etc/nginx/conf.d",
+          "readOnly": true
+        },
+        {
+          "sourceVolume": "awseb-logs-nginx-proxy",
+          "containerPath": "/var/log/nginx"
+        }
+      ]
+    }
+  ]
+}
